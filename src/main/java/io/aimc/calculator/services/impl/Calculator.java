@@ -1,6 +1,9 @@
 package io.aimc.calculator.services.impl;
 
+import io.aimc.calculator.domain.entity.SolutionHistoryElement;
+import io.aimc.calculator.domain.repository.SolutionsRepository;
 import io.aimc.calculator.services.ICalculator;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,29 +11,36 @@ import java.util.Arrays;
 import java.util.Collections;
 
 @Service
+@RequiredArgsConstructor
 public class Calculator implements ICalculator {
 
     private static final short OPEN_BRACKET = '(';
     private static final short CLOSED_BRACKET = ')';
     private static final short DOT = '.';
 
-    public String solution(String fullExpression) {
+    private final SolutionsRepository solutionsRepository;
 
-        while (getCountOpenBracket(fullExpression) > 0) {
-            int indexOpenBracket = fullExpression.indexOf(OPEN_BRACKET);
+    public String solution(final String fullExpression) {
+        String expressionOnProcess = fullExpression;
+        String solution;
+
+        while (getCountOpenBracket(expressionOnProcess) > 0) {
+            int indexOpenBracket = expressionOnProcess.indexOf(OPEN_BRACKET);
             int indexClosedBracket;
 
-            for (int i = 0; i < fullExpression.length(); i++) {
-                if (fullExpression.charAt(i) == OPEN_BRACKET) {
+            for (int i = 0; i < expressionOnProcess.length(); i++) {
+                if (expressionOnProcess.charAt(i) == OPEN_BRACKET) {
                     indexOpenBracket = i;
-                } else if (fullExpression.charAt(i) == CLOSED_BRACKET) {
+                } else if (expressionOnProcess.charAt(i) == CLOSED_BRACKET) {
                     indexClosedBracket = i;
-                    fullExpression = replacePartExpressionOnResult(fullExpression, indexOpenBracket, indexClosedBracket);
+                    expressionOnProcess = replacePartExpressionOnResult(expressionOnProcess, indexOpenBracket, indexClosedBracket);
                 }
             }
         }
 
-        return calculate(splitOnNumberAndOperation(fullExpression));
+        solution = calculate(splitOnNumberAndOperation(expressionOnProcess));
+        saveSolution(fullExpression, solution);
+        return solution;
     }
 
     private static ArrayList<String> splitOnNumberAndOperation(String expression) {
@@ -309,6 +319,14 @@ public class Calculator implements ICalculator {
             }
         }
         return numbersAndOperations.get(0);
+    }
+
+    private synchronized void saveSolution(String expression, String solution) {
+        solutionsRepository.save(SolutionHistoryElement.builder()
+                .addDate(new java.util.Date())
+                .expression(expression)
+                .solution(solution)
+                .build());
     }
 }
 
