@@ -1,5 +1,6 @@
 package io.aimc.calculator.domain.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 @Table(name = "solution_history")
 @Getter
 @Setter
+@Builder
 public class SolutionHistoryElement {
 
     @Id
