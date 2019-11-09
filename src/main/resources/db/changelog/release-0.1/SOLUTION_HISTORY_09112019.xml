@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="09.11.2019T16:00:00" author="ShevtsevPavel">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="solution_history"/>
+            </not>
+        </preConditions>
+        <createTable tableName="solution_history">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true"
+                             nullable="false"
+                             unique="true"/>
+            </column>
+            <column name="add_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="expression" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="solution" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
