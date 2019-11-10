@@ -1,0 +1,33 @@
+{
+  "info": {
+    "_postman_id": "69f914e1-24c2-44cf-8d31-3350dc7de46f",
+    "name": "Calculator",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "solve",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/calculator/solve/5+5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "calculator",
+            "solve",
+            "5+5"
+          ]
+        },
+        "description": "\n"
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}
