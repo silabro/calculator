@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Интерфейс предназначен для реализации статистики математических решений.
  */
-public interface ISolutionStatistics {
+public interface ISolutionStatisticsService {
     /**
      * Считает количество решений по дате.
      *
@@ -46,5 +46,5 @@ public interface ISolutionStatistics {
      *
      * @return - популярное число.
      */
-    int getPopularNumber();
+    double getPopularNumber();
 }
