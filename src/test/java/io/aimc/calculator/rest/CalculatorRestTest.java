@@ -1,7 +1,7 @@
 package io.aimc.calculator.rest;
 
-import io.aimc.calculator.services.ICalculator;
-import io.aimc.calculator.services.impl.Calculator;
+import io.aimc.calculator.services.ICalculatorService;
+import io.aimc.calculator.services.impl.CalculatorService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -12,14 +12,14 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.mockito.Mockito.when;
 
-@WebMvcTest({ICalculator.class, CalculatorRest.class})
+@WebMvcTest({ICalculatorService.class, CalculatorRest.class})
 class CalculatorRestTest {
 
     @Autowired
     private MockMvc mvc;
 
     @MockBean
-    private Calculator calculator;
+    private CalculatorService calculator;
 
     @Test
     void calculate() throws Exception {
