@@ -1,7 +1,7 @@
 package io.aimc.calculator.rest;
 
 import io.aimc.calculator.dto.CalculatorResponseDTO;
-import io.aimc.calculator.services.ICalculator;
+import io.aimc.calculator.services.ICalculatorService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +17,7 @@ import static io.aimc.calculator.mapping.CalculatorMapper.MAPPER;
 @RequiredArgsConstructor
 public class CalculatorRest {
 
-    private final ICalculator calculator;
+    private final ICalculatorService calculator;
 
     @PostMapping(value = "/solve/{expression}")
     public CalculatorResponseDTO calculate(@PathVariable String expression) {

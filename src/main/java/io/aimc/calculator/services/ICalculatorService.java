@@ -1,6 +1,6 @@
 package io.aimc.calculator.services;
 
-public interface ICalculator {
+public interface ICalculatorService {
     /**
      * Решает математическое уравнение.
      *

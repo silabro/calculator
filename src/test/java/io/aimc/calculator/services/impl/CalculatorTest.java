@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 class CalculatorTest {
 
     @InjectMocks
-    private Calculator calculator;
+    private CalculatorService calculator;
 
     @Mock
     private SolutionsRepository solutionsRepository;

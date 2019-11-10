@@ -2,7 +2,7 @@ package io.aimc.calculator.services.impl;
 
 import io.aimc.calculator.domain.entity.SolutionHistoryElement;
 import io.aimc.calculator.domain.repository.SolutionsRepository;
-import io.aimc.calculator.services.ICalculator;
+import io.aimc.calculator.services.ICalculatorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
-public class Calculator implements ICalculator {
+public class CalculatorService implements ICalculatorService {
 
     private static final short OPEN_BRACKET = '(';
     private static final short CLOSED_BRACKET = ')';
@@ -39,7 +39,7 @@ public class Calculator implements ICalculator {
         }
 
         solution = calculate(splitOnNumberAndOperation(expressionOnProcess));
-        saveSolution(fullExpression, solution);
+        saveSolutionToRepository(fullExpression, solution);
         return solution;
     }
 
@@ -321,7 +321,7 @@ public class Calculator implements ICalculator {
         return numbersAndOperations.get(0);
     }
 
-    private synchronized void saveSolution(String expression, String solution) {
+    private synchronized void saveSolutionToRepository(String expression, String solution) {
         solutionsRepository.save(SolutionHistoryElement.builder()
                 .addDate(new java.util.Date())
                 .expression(expression)
